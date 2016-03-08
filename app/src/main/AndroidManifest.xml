@@ -18,6 +18,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--Detalle-->
+        <activity
+            android:name=".DetailActivity"
+            android:label="@string/titulo_detalle"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <!--Ajustes-->
         <activity
             android:name=".SettingsActivity"

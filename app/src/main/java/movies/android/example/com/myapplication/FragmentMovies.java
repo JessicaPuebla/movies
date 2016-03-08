@@ -10,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -38,12 +40,19 @@ public class FragmentMovies extends Fragment {
                              Bundle savedInstanceState) {
 
         //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        View rootView = inflater.inflate(R.layout.content_main, container, false);
+        final View rootView = inflater.inflate(R.layout.content_main, container, false);
 
         adaptador = new AdaptadorDePeliculas(rootView.getContext());
         GridView gridView = (GridView) rootView.findViewById(R.id.grid);
         gridView.setAdapter(adaptador);
-
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(rootView.getContext(), "ListView clicked"+id, Toast.LENGTH_SHORT).show();
+                /*Intent intentDetail = new Intent(getActivity(), DetailMovie.class);
+                startActivity(intentDetail);*/
+            }
+        });
         return rootView; //return super.onCreateView(inflater, container, savedInstanceState);
     }
 
