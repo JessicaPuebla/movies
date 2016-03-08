@@ -1,6 +1,7 @@
 package movies.android.example.com.myapplication;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -12,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,9 +48,9 @@ public class FragmentMovies extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(rootView.getContext(), "ListView clicked"+id, Toast.LENGTH_SHORT).show();
-                /*Intent intentDetail = new Intent(getActivity(), DetailMovie.class);
-                startActivity(intentDetail);*/
+                Log.v(FragmentMovies.class.getSimpleName(), "HEY");
+                Intent intentDetail = new Intent(getActivity(), DetailActivity.class);
+                startActivity(intentDetail);
             }
         });
         return rootView; //return super.onCreateView(inflater, container, savedInstanceState);
