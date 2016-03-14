@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class DetalleActivity extends AppCompatActivity {
 
@@ -50,12 +50,15 @@ public class DetalleActivity extends AppCompatActivity {
             // The detail Activity called via intent.  Inspect the intent for movie data.
             Intent intent = getActivity().getIntent();
             if (intent != null && intent.hasExtra("pelicula")) {
-                mPelicula = intent.getParcelableExtra("pelicula");
-                Toast.makeText(rootView.getContext(), mPelicula.getDescripcion(), Toast.LENGTH_SHORT).show();
-            }
+                mPelicula = intent.getParcelableExtra("pelicula"); //Datos de la película seleccionada
+                //Toast.makeText(rootView.getContext(), mPelicula.getDescripcion(), Toast.LENGTH_SHORT).show();
 
-            return null;
+                TextView titlePei = (TextView) rootView.findViewById(R.id.titulo_pelicula);
+                titlePei.setText(mPelicula.getTitulo());
+
+            }
+            //return null;
+            return rootView;
         }
     }
-
 }
