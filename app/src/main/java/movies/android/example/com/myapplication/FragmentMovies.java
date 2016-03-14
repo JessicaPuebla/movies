@@ -36,10 +36,9 @@ public class FragmentMovies extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         final View rootView = inflater.inflate(R.layout.content_main, container, false);
 
         adaptador = new AdaptadorDePeliculas(rootView.getContext());
@@ -48,12 +47,14 @@ public class FragmentMovies extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.v(FragmentMovies.class.getSimpleName(), "HEY");
-                Intent intentDetail = new Intent(getActivity(), DetailActivity.class);
-                startActivity(intentDetail);
+                Pelicula item = (Pelicula) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), DetalleActivity.class);
+                intent.putExtra("pelicula", item);
+                startActivity(intent);
+
             }
         });
-        return rootView; //return super.onCreateView(inflater, container, savedInstanceState);
+        return rootView;
     }
 
     private void updateMovies() {
@@ -197,9 +198,14 @@ public class FragmentMovies extends Fragment {
         private Pelicula[] getMoviesDataFromJson(String moviesJsonStr)
                 throws JSONException {
 
-            // These are the names of the JSON objects that need to be extracted.
+            // Estos son los nombres de los objetos JSON que necesitan ser extraídos
             final String OWM_RESULTS = "results";
             final String OWM_POSTER  = "poster_path";
+            final String OWM_TITULO  = "title";
+            /*final String OWM_ANIO    = "";
+            final String OWM_DURACIO = "";*/
+            final String OWM_CALIFIC = "vote_average";
+            final String OWM_DESCRIP = "overview";
 
             JSONObject moviesJson = new JSONObject(moviesJsonStr);
             JSONArray moviesArray = moviesJson.getJSONArray(OWM_RESULTS);
@@ -211,18 +217,34 @@ public class FragmentMovies extends Fragment {
             for(int i = 0; i < moviesArray.length(); i++) {
 
                 String poster = "";
+                String titulo = "";
+                String anio   = "";
+                String duraci = "";
+                String califi = "";
+                String descri = "";
 
                 // Get the JSON object representing the movie
                 JSONObject movie = moviesArray.getJSONObject(i);
 
                 if ( (movie.getString(OWM_POSTER) != null) && (!movie.getString(OWM_POSTER).equals("")) && (movie.getString(OWM_POSTER) != "null")  ) {
                     poster = baseImagen + tamaImagen + movie.getString(OWM_POSTER);
+                    titulo = movie.getString(OWM_TITULO);
+                    //anio   = movie.getString(OWM_ANIO);
+                    //duraci = movie.getString(OWM_DURACIO);
+                    califi = movie.getString(OWM_CALIFIC);
+                    descri = movie.getString(OWM_DESCRIP);
                     //Log.e(LOG_TAG, movie.getString(OWM_POSTER));
-                    this.items[i] = new Pelicula(poster);
+                    //this.items[i] = new Pelicula(poster);
+                    Pelicula peliAdd = new Pelicula();
+                    peliAdd.nombre = poster;
+                    peliAdd.titulo = titulo;
+                    peliAdd.anio = anio;
+                    peliAdd.duracion = duraci;
+                    peliAdd.calificacion = califi;
+                    peliAdd.descripcion = descri;
+                    this.items[i] = peliAdd;
                 }
             }
-
-            //return peliculas;
             return this.items;
         }
 
@@ -236,11 +258,13 @@ public class FragmentMovies extends Fragment {
                         Log.e(LOG_TAG, "Error, la instancia de esta película es nula.");
                     } else {
                         //Log.e(LOG_TAG, peli.getNombre());
-                        adaptador.add(peli.getNombre());
+                        //adaptador.add(peli.getNombre());
+                        adaptador.agregar(peli);
                     }
                 }
                 // New data is back from the server.  Hooray!
             }
         }
+
     }
 }

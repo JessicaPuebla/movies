@@ -66,12 +66,15 @@ public class AdaptadorDePeliculas extends BaseAdapter {
 
     /* Limpiar el arreglo */
     public void clear() {
-        this.ITEMS.clear();
+        ITEMS.clear();
     }
 
     /* Agregar elementos al arreglo */
-    public void add( String pelicula ) {
-        this.ITEMS.add(new Pelicula(pelicula));
+    public void agregar(Pelicula pelicula) {
+        ITEMS.add(pelicula);
     }
+    /*public void add( String pelicula ) {
+        this.ITEMS.add(new Pelicula(pelicula));
+    }*/
 
 }
