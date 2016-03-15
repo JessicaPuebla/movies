@@ -229,8 +229,8 @@ public class FragmentMovies extends Fragment {
                 if ( (movie.getString(OWM_POSTER) != null) && (!movie.getString(OWM_POSTER).equals("")) && (movie.getString(OWM_POSTER) != "null")  ) {
                     poster = baseImagen + tamaImagen + movie.getString(OWM_POSTER);
                     titulo = movie.getString(OWM_TITULO);
-                    //anio   = movie.getString(OWM_ANIO);
-                    //duraci = movie.getString(OWM_DURACIO);
+                    anio = "2015"; //anio   = movie.getString(OWM_ANIO);
+                    duraci = "120"; //duraci = movie.getString(OWM_DURACIO);
                     califi = movie.getString(OWM_CALIFIC);
                     descri = movie.getString(OWM_DESCRIP);
                     //Log.e(LOG_TAG, movie.getString(OWM_POSTER));

@@ -24,4 +24,92 @@
         android:textStyle="bold"
         android:paddingRight="0dp" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/titulo_pelicula"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/poster_pelicula"
+            android:background="@color/design_fab_stroke_end_inner_color"
+            android:contentDescription="@string/poster"
+            android:minHeight="160dp"
+            android:minWidth="120dp"
+            android:maxHeight="160dp"
+            android:maxWidth="120dp"
+            android:layout_alignTop="@+id/anio_pelicula"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:cropToPadding="false"
+            android:adjustViewBounds="false"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_marginLeft="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/anio_pelicula"
+            android:textSize="20sp"
+            android:textColor="@color/abc_secondary_text_material_light"
+            android:layout_marginRight="130dp"
+            android:layout_marginEnd="130dp"
+            android:layout_marginTop="41dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/duracion_pelicula"
+            android:textSize="18sp"
+            android:paddingTop="10dp"
+            android:textStyle="italic"
+            android:textColor="@color/abc_secondary_text_material_light"
+            android:layout_below="@+id/anio_pelicula"
+            android:layout_alignLeft="@+id/anio_pelicula"
+            android:layout_alignStart="@+id/anio_pelicula" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/calificacion_pelicula"
+            android:layout_below="@+id/duracion_pelicula"
+            android:layout_alignLeft="@+id/duracion_pelicula"
+            android:layout_alignStart="@+id/duracion_pelicula"
+            android:paddingTop="10dp"
+            android:textSize="15sp"
+            android:textColor="@color/negro"
+            android:paddingBottom="10dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favorito"
+            android:id="@+id/boton_favorito"
+            android:layout_below="@+id/calificacion_pelicula"
+            android:layout_alignLeft="@+id/calificacion_pelicula"
+            android:layout_alignStart="@+id/calificacion_pelicula"
+            android:textColor="@color/gris"
+            android:background="@color/cian"
+            android:padding="5dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/descripcion_pelicula"
+            android:layout_below="@+id/poster_pelicula"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="43dp" />
+
+    </RelativeLayout>
+
 </RelativeLayout>
