@@ -9,15 +9,15 @@
     <string name="titulo_ajustes">Ajustes</string>
     <string name="pref_order_label">Ordenar por</string>
     <string name="pref_order_key" translatable="false">order_pref</string>
-    <string name="pref_order_default" translatable="false">popularity.desc</string>
+    <string name="pref_order_default" translatable="false">popular</string>
     <string name="cancel_button">Cancelar</string>
     <string-array name="pref_order_options">
         <item>Más popular</item>
         <item>Mejor valorado</item>
     </string-array>
     <string-array name="pref_order_values">
-        <item>popularity.desc</item>
-        <item>vote_average.desc</item>
+        <item>popular</item>
+        <item>top_rated</item>
     </string-array>
 
     <string name="favorito">Marcar como\n favorito</string>

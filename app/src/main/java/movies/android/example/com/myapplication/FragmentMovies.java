@@ -115,12 +115,8 @@ public class FragmentMovies extends Fragment {
 
             //String orden  = "popularity.desc";
             String idioma = "es";
-            String pais   = "";
-            String cert   = "";
-            if( ordenarPor.equalsIgnoreCase("vote_average.desc") ) { //Si está ordenado por Mejor valorado
-                pais = "MX";
-                cert = "R";
-            }
+            String pais   = "MX";
+            String cert   = "R";
 
             // These two need to be declared outside the try/catch
             // so that they can be closed in the finally block.
@@ -130,19 +126,21 @@ public class FragmentMovies extends Fragment {
             try {
                 // Build URL
                 final String BASE_URL =
-                        "https://api.themoviedb.org/3/discover/movie?";
-                final String SORT_PARAM   = "sort_by";
+                        "https://api.themoviedb.org/3/movie/"+ordenarPor+"?";
+                //final String SORT_PARAM   = "sort_by";
                 final String CERTC_PARAM  = "certification_country";
                 final String CERT_PARAM   = "certification";
                 final String APIKEY_PARAM = "api_key";
                 final String LANGUA_PARAM = "language";
+                final String RELDAT_PARMA = "primary_release_year"; //Resultados con la fecha
 
                 Uri builtUri = Uri.parse(BASE_URL).buildUpon()
-                        .appendQueryParameter(SORT_PARAM, ordenarPor) //.params[0]
+                        //.appendQueryParameter(SORT_PARAM, ordenarPor) //.params[0]
                         .appendQueryParameter(CERTC_PARAM, pais)
                         .appendQueryParameter(CERT_PARAM, cert)
                         .appendQueryParameter(APIKEY_PARAM, BuildConfig.MOVIE_API_KEY)
                         .appendQueryParameter(LANGUA_PARAM, idioma)
+                        .appendQueryParameter(RELDAT_PARMA, "true")
                         .build();
 
                 URL url = new URL(builtUri.toString());
@@ -202,8 +200,8 @@ public class FragmentMovies extends Fragment {
             final String OWM_RESULTS = "results";
             final String OWM_POSTER  = "poster_path";
             final String OWM_TITULO  = "title";
-            /*final String OWM_ANIO    = "";
-            final String OWM_DURACIO = "";*/
+            final String OWM_ANIO    = "release_date";
+            /*final String OWM_DURACIO = "";*/
             final String OWM_CALIFIC = "vote_average";
             final String OWM_DESCRIP = "overview";
 
@@ -229,12 +227,11 @@ public class FragmentMovies extends Fragment {
                 if ( (movie.getString(OWM_POSTER) != null) && (!movie.getString(OWM_POSTER).equals("")) && (movie.getString(OWM_POSTER) != "null")  ) {
                     poster = baseImagen + tamaImagen + movie.getString(OWM_POSTER);
                     titulo = movie.getString(OWM_TITULO);
-                    anio = "2015"; //anio   = movie.getString(OWM_ANIO);
+                    anio = getAnio(movie.getString(OWM_ANIO));
                     duraci = "120"; //duraci = movie.getString(OWM_DURACIO);
                     califi = movie.getString(OWM_CALIFIC);
                     descri = movie.getString(OWM_DESCRIP);
-                    //Log.e(LOG_TAG, movie.getString(OWM_POSTER));
-                    //this.items[i] = new Pelicula(poster);
+                    //Instanciar y agregar la película
                     Pelicula peliAdd = new Pelicula();
                     peliAdd.nombre = poster;
                     peliAdd.titulo = titulo;
@@ -264,6 +261,10 @@ public class FragmentMovies extends Fragment {
                 }
                 // New data is back from the server.  Hooray!
             }
+        }
+
+        private String getAnio(String fecha) {
+            return fecha.substring(0, 4);
         }
 
     }
